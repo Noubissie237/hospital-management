@@ -10,8 +10,6 @@ COPY . /app/
 
 RUN apt-get upgrade
 
-RUN pip install --upgrade pip
-
 RUN pip install -r requirements.txt
 
 RUN python manage.py makemigrations
