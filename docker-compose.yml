@@ -10,13 +10,13 @@ services:
       - hospitalnetwork
 
 
-  # gestionpersonnel:
-  #   build: 
-  #     context: ./GestionPersonnel/GestionPersonnel
-  #   ports:
-  #     - "8000:8000"
-  #   networks:
-  #     - hospitalnetwork
+  gestionpersonnel:
+    build: 
+      context: ./GestionPersonnel/GestionPersonnel
+    ports:
+      - "8000:8000"
+    networks:
+      - hospitalnetwork
 
   
   # stockmanagment:
