@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  gestionpatient:
+    build: 
+      context: ./GestionPatients/GestionPatients
+    ports:
+      - "8001:8001"
+    networks:
+      - hospitalnetwork
+
+
+  # gestionpersonnel:
+  #   build: 
+  #     context: ./GestionPersonnel/GestionPersonnel
+  #   ports:
+  #     - "8000:8000"
+  #   networks:
+  #     - hospitalnetwork
+
+  
+  # stockmanagment:
+  #   build: 
+  #     context: ./StockManagment/StockManagment
+  #   ports:
+  #     - "8002:8002"
+  #   networks:
+  #     - hospitalnetwork
+
+networks:
+  hospitalnetwork:
