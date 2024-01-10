@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>HOPITAL</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	<noscript>
+		<link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" />
+	</noscript>
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="logo">
+				<span class="icon fa-home"></span>
+			</div>
+			<div class="content">
+				<div class="inner">
+					<h1>Reception</h1>
+					<p>Hey, nous sommes heureux de vous revoir... De nouveaux patients attendent surement de se faire
+						enrégistrer <br />
+						cliquez sur le bouton ci-dessous pour commencer</p>
+				</div>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="#form">Commencer</a></li>
+					<!--<li><a href="#elements">Elements</a></li>-->
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Contact -->
+			<article id="form">
+				<h2 class="major">enregistrement</h2><br>
+				<form method="post" action="">
+					{% csrf_token %}
+
+					<input type="hidden" id="message" value="{{ message }}">
+
+					<div class="field half first">
+						<label for="nom">nom</label>
+						<input type="text" name="nom" id="nom" />
+					</div>
+
+					<div class="field half first">
+						<label for="prenom">prenom</label>
+						<input type="text" name="prenom" id="name" />
+					</div>
+
+					<div class="field half first">
+						<label for="email">email</label>
+						<input type="email" name="email" id="email" required />
+					</div>
+
+					<div class="field half first">
+						<label for="age">age</label>
+						<input type="text" name="age" id="age" required />
+					</div>
+
+					<div class="field half first">
+						<label for="sexe">sexe</label>
+						<select name="sexe" id="sexe" required>
+							<option value="" disabled selected></option>
+							<option value="MASCULIN">MASCULIN</option>
+							<option value="FEMININ">FEMININ</option>
+						</select>
+					</div>
+
+					<div class="field half first">
+						<label for="service">service</label>
+						<select name="service" id="service" required>
+							<option value="" disabled selected></option>
+							<option value="RADIOLOGUE">RADIOLOGUE</option>
+							<option value="PSYCHIATRE">PSYCHIATRE</option>
+							<option value="PEDIATRE">PEDIATRE</option>
+							<option value="OPHTAMOLOGUE">OPHTAMOLOGUE</option>
+							<option value="NEUROLOGUE">NEUROLOGUE</option>
+							<option value="GYNECOLOGUE">GYNECOLOGUE</option>
+							<option value="GENERALISTE">GENERALISTE</option>
+							<option value="DENTISTE">DENTISTE</option>
+							<option value="CHIRURGIEN">CHIRURGIEN</option>
+							<option value="CARDIOLOGUE">CARDIOLOGUE</option>
+						</select>
+					</div>
+
+					<ul class="actions">
+						<li><input type="submit" value="Valider" class="special" /></li>
+					</ul>
+				</form>
+
+			</article>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<p class="copyright">&copy; Hopital.</p>
+		</footer>
+
+	</div>
+
+	<!-- BG -->
+	<div id="bg"></div>
+
+	<!-- Scripts -->
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/js/skel.min.js' %}"></script>
+	<script src="{% static 'assets/js/util.js' %}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+	<script src="{% static 'assets/js/confirmation.js' %}"></script>
+
+</body>
+
+</html>
