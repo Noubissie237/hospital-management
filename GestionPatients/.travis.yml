@@ -1,0 +1,21 @@
+language: generic 
+
+services:
+  - docker
+
+before_script:
+  - cd GestionPatients/  
+  - docker build -t gestionpatients:latest .
+
+script:
+  - docker run -d gestionpatients:latest
+
+after_script:
+  - docker stop $(docker ps -q)
+
+notifications:
+  email:
+    recipients:
+      - wilfried.noubissie@facsciences-uy1.cm
+    on_success: always
+    on_failure: always
