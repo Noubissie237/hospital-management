@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<link href="{% static 'forms/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+<link href="{% static 'forms/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+<link href="{% static 'forms/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+<link href="{% static 'forms/css/main.css' %}" rel="stylesheet" media="all">
+
+
+
+<div class="page-wrapper p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-body">
+                <h2 class="title text-center text-primary">PRESCRIPTION MEDICAL</h2>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input class="input--style-1 text-success" type="text" placeholder="NOM" name="nom" value="{{ data.nom }}">
+                    </div>
+                    <div class="input-group">
+                        <input class="input--style-1 text-success" type="text" placeholder="PRENOM" name="prenom" value="{{ data.prenom }}">
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input class="input--style-1 text-success" type="tel" placeholder="AGE" name="age" value=" {{ data.age }} ">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input class="input--style-1 text-success" type="text" placeholder="SEXE" name="sexe" value="{{data.sexe}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input class="input--style-1 text-success" type="email" placeholder="EMAIL" name="email" value="{{ data.email }}">
+                    </div>
+
+                    <div class="input-group">
+                        <textarea class="input--style-1 text" name="antecedent" id="" cols="60" rows="5"
+                            placeholder="  ANTECEDENTS MEDICAUX"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRESCRIPTION 1" name="presc1">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRESCRIPTION 2" name="presc2">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PRESCRIPTION 3" name="presc3">
+                    </div>
+
+                    <div class="p-t-20">
+                        <button class="btn btn--radius btn--green" type="submit">Enrégistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'forms/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'forms/vendor/select2/select2.min.js' %}"></script>
+<script src="{% static 'forms/vendor/datepicker/moment.min.js' %}"></script>
+<script src="{% static 'forms/vendor/datepicker/daterangepicker.js' %}"></script>
+
+<script src="{% static 'forms/js/global.js' %}"></script>
+
+
+{% endblock content %}
