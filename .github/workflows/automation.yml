@@ -17,7 +17,7 @@ jobs:
       - name: Build and push microservice_gestion_patients
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
         run: |
           cd GestionPatients/GestionPatients
           docker build -t noubissie237/gestion_patients:${{ github.sha }} .
