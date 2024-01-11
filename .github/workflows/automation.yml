@@ -1,27 +1,28 @@
-name: Dockerize my hospital management application
-on: push
-jobs:
-  build-container:
-    name: Build Docker container image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      # - name: Publish to Github package
-      #   uses: docker/build-push-action@v2
-      #   with:
-      # #     username: ${{ github.actor }}
-      # #     password: ${{ secrets.GITHUB_TOKEN }}
-      # #     registry: docker.pkg.github.com
-      # #     repository: ${{ github.repository }}/main
-      # #     tags: latest, ${{ github.run_number }}
+name: Docker Hub Deployment
 
-      - name: Publish to Docker hub
-        uses: docker/build-push-action@v2
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: noubissie237/hospital-management
-          tags: latest, ${{ github.run_number }}
 
-        
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./docker-compose.yml
+          push: true
+          tags: noubissie237/hospital-management:latest
