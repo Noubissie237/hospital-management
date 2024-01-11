@@ -1,28 +1,47 @@
-name: Docker Hub Deployment
+name: Docker Build and Push
 
 on:
   push:
     branches:
-      - main  
+      - main  # Remplacez par la branche principale de votre projet
 
 jobs:
-  build_and_deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
+      # Étape de construction de Gestion des patients
+      - name: Build and push microservice_gestion_patients
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
+        run: |
+          cd GestionPatients/GestionPatients
+          docker build -t noubissie237/gestion_patients:${{ github.sha }} .
+          docker login -u $DOCKER_USERNAME -p $MY_DOCKER_HUB_TOKEN
+          docker push noubissie237/microservice_gestion_patients:${{ github.sha }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./docker-compose.yml
-          push: true
-          tags: noubissie237/hospital-management:latest
+      # Étape de construction de Gestion des utilisateurs
+      - name: Build and push microservice_gestion_utilisateurs
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
+        run: |
+          cd GestionPersonnel/GestionPersonnel
+          docker build -t noubissie237/gestion_utilisateurs:${{ github.sha }} .
+          docker login -u $DOCKER_USERNAME -p $MY_DOCKER_HUB_TOKEN
+          docker push noubissie237/microservice_gestion_utilisateurs:${{ github.sha }}
+
+      # Étape de construction de la pharmacie
+      - name: Build and push microservice_gestion_pharmacie
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
+        run: |
+          cd StockManagment/StockManagment
+          docker build -t noubissie237/gestion_pharmacie:${{ github.sha }} .
+          docker login -u $DOCKER_USERNAME -p $MY_DOCKER_HUB_TOKEN
+          docker push noubissie237/microservice_gestion_pharmacie:${{ github.sha }}
