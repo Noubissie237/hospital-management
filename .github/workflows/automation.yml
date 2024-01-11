@@ -24,7 +24,7 @@ jobs:
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push noubissie237/microservice_gestion_patients:latest
 
-      # Étape de construction de Gestion des utilisateurs
+      # Étape de construction de Gestion du personnel
       - name: Build and push microservice_gestion_personnel
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -32,7 +32,7 @@ jobs:
         run: |
           cd GestionPersonnel/GestionPersonnel
           docker build -t noubissie237/microservice_gestion_personnel:latest .
-          docker login -u $DOCKER_USERNAME -p $MY_DOCKER_HUB_TOKEN
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push noubissie237/microservice_gestion_personnel:latest
 
       # Étape de construction de la pharmacie
@@ -43,5 +43,5 @@ jobs:
         run: |
           cd StockManagment/StockManagment
           docker build -t noubissie237/microservice_gestion_pharmacie:latest .
-          docker login -u $DOCKER_USERNAME -p $MY_DOCKER_HUB_TOKEN
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push noubissie237/microservice_gestion_pharmacie:latest
