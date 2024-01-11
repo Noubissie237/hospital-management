@@ -10,18 +10,18 @@ jobs:
       # - name: Publish to Github package
       #   uses: docker/build-push-action@v2
       #   with:
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
-      #     registry: docker.pkg.github.com
-      #     repository: ${{ github.repository }}/main
-      #     tags: latest, ${{ github.run_number }}
+      # #     username: ${{ github.actor }}
+      # #     password: ${{ secrets.GITHUB_TOKEN }}
+      # #     registry: docker.pkg.github.com
+      # #     repository: ${{ github.repository }}/main
+      # #     tags: latest, ${{ github.run_number }}
 
-      # - name: Publish to Docker hub
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     repository: noubissie237/hospital-management
-      #     tags: latest, ${{ github.run_number }}
+      - name: Publish to Docker hub
+        uses: docker/build-push-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: noubissie237/hospital-management
+          tags: latest, ${{ github.run_number }}
 
         
