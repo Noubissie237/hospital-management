@@ -22,7 +22,7 @@ jobs:
           cd GestionPatients/GestionPatients
           docker build -t noubissie237/gestion_patients:${{ github.sha }} .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push noubissie237/microservice_gestion_patients:${{ github.sha }}
+          docker push noubissie237/gestion_patients:${{ github.sha }}
 
       # Étape de construction de Gestion des utilisateurs
       - name: Build and push microservice_gestion_utilisateurs
