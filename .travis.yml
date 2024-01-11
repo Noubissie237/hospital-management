@@ -4,7 +4,7 @@ services:
   - docker
 
 before_script:
-  - sudo sysctl -w vm.max_map_count=262144
+  - docker ps
 
 script:
   - docker-compose up -d
