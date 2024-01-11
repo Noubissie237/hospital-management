@@ -22,6 +22,7 @@ jobs:
           cd GestionPatients/GestionPatients
           docker build -t noubissie237/gestion_patients:${{ github.sha }} .
           docker login -u $DOCKER_USERNAME -p $MY_DOCKER_HUB_TOKEN
+          echo $MY_DOCKER_HUB_TOKEN | docker login -u $DOCKER_USERNAME --password-stdin
           docker push noubissie237/microservice_gestion_patients:${{ github.sha }}
 
       # Étape de construction de Gestion des utilisateurs
