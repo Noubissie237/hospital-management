@@ -45,3 +45,33 @@ jobs:
           docker build -t noubissie237/microservice_gestion_pharmacie:latest .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push noubissie237/microservice_gestion_pharmacie:latest
+
+      # Fusionner les images en une seule
+      - name: Merge images
+        run: |
+          docker create --name merge_container noubissie237/microservice_gestion_patients:latest
+          docker cp merge_container:/app/merged_image .
+          docker rm merge_container
+          docker image rm noubissie237/microservice_gestion_patients:latest
+
+          docker create --name merge_container noubissie237/microservice_gestion_personnel:latest
+          docker cp merge_container:/app/merged_image .
+          docker rm merge_container
+          docker image rm noubissie237/microservice_gestion_personnel:latest
+
+          docker create --name merge_container noubissie237/microservice_gestion_pharmacie:latest
+          docker cp merge_container:/app/merged_image .
+          docker rm merge_container
+          docker image rm noubissie237/microservice_gestion_pharmacie:latest
+
+          docker build -t hospital-management:latest .
+
+      # Pousser l'image fusionnée vers Docker Hub
+      - name: Push merged image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker tag hospital-management:latest noubissie237/hospital-management:latest
+          docker push noubissie237/hospital-management:latest
