@@ -45,3 +45,16 @@ jobs:
           docker build -t noubissie237/microservice_gestion_pharmacie:latest .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push noubissie237/microservice_gestion_pharmacie:latest
+
+      # Envoi des mails
+      - name: Send email notification
+        if: ${{ always() }}
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: wilfried.noubissie@facsciences-uy1.cm
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Workflow Execution Completed
+          body: The workflow execution has completed successfully.
+          to: noubissiekamgawilfried2017@gmail.com
