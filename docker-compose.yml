@@ -9,8 +9,7 @@ services:
     networks:
       - hospitalnetwork
     volumes:
-      - .:/app
-
+      - ./GestionPatients/GestionPatients:/app
 
   gestionpersonnel:
     build: 
@@ -20,9 +19,8 @@ services:
     networks:
       - hospitalnetwork
     volumes:
-      - .:/app
+      - ./GestionPersonnel/GestionPersonnel:/app
 
-  
   stockmanagment:
     build: 
       context: ./StockManagment/StockManagment
@@ -31,7 +29,7 @@ services:
     networks:
       - hospitalnetwork
     volumes:
-      - .:/app
+      - ./StockManagment/StockManagment:/app
 
 networks:
   hospitalnetwork:
