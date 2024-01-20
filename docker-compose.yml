@@ -30,6 +30,16 @@ services:
       - hospitalnetwork
     volumes:
       - ./StockManagment/StockManagment:/app
+      
+  patientso:
+    build: 
+      context: ./patient_so
+    ports:
+      - "8003:8003"
+    networks:
+      - hospitalnetwork
+    volumes:
+      - ./patient_so:/app
 
 networks:
   hospitalnetwork:
