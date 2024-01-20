@@ -5,12 +5,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import *
-from .serializers import PatientSerializer, RDVSerializer
-from rest_framework import generics
+from .serializers import PatientSerializer, RendezVousSerializer
+from rest_framework import viewsets
 from django.views import View
 from requests.exceptions import RequestException
 import requests
 # Create your views here.
+
+class RendezVousListAPIView(viewsets.ModelViewSet):
+    queryset = RendezVous.objects.all()
+    serializer_class = RendezVousSerializer
+
 
 @login_required
 def profile(request: HttpRequest) -> HttpResponse:
@@ -44,7 +49,7 @@ class HomeView(View):
     def post(self, request, *args, **kwags):
         return render(request, self.templates_name, self.context)
 
-class PatientListAPIView(generics.ListAPIView):
+class PatientListAPIView(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
@@ -85,11 +90,10 @@ class AjoutPatient(LoginRequiredMixin,View):
         return render(request, self.templates_name)
     
 
-
 def get_disponibilite_list():
     try:
         # Récupérer la liste des patients depuis le microservice Patient
-        response = requests.get('http://gestionpersonnel:8000/dispo/')
+        response = requests.get('http://gestionpersonnel:8000/api/dispo/')
         if response.status_code == 200:
             return response.json()
     except RequestException as e:
@@ -218,6 +222,3 @@ class AjoutRDV(View):
 
             return render(request, 'accounts/prendre_rdv.html', {'patient_list': self.patient_list})
 
-class RDVListAPIView(generics.ListAPIView):
-    queryset = RendezVous.objects.all()
-    serializer_class = RDVSerializer

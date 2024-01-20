@@ -4,12 +4,13 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'prescriptions', PrescriptionViewSet)
+router.register(r'dispo', DisponibiliteListAPIView)
 
 urlpatterns = [
     path('api/', include(router.urls)),
     path('', home),
     path('home/', home),
-    path('rendez-vous/', appointment),
+    path('rendez-vous/', rendezvous),
     path('consultations/', consultations),
     path('prescription/', prescription),
     path('file-d-attente/', file_d_attente),

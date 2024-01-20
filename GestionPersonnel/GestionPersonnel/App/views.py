@@ -2,8 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from .models import Medecin, Prescription, Consultation
-from .serializers import PrescriptionSerializer
+from .models import Medecin, Prescription, Consultation, Disponibilite, RendezVous
+from .serializers import PrescriptionSerializer, DisponibiliteSerializer
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, PrescriptionForm
 from django.contrib.auth.decorators import login_required
@@ -17,12 +17,17 @@ from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework import generics
 
 
 
 class PrescriptionViewSet(viewsets.ModelViewSet):
     queryset = Prescription.objects.all()
     serializer_class = PrescriptionSerializer
+
+class DisponibiliteListAPIView(viewsets.ModelViewSet):
+    queryset = Disponibilite.objects.all()
+    serializer_class = DisponibiliteSerializer
 
 def generer_mot_de_passe():
     caracteres = string.ascii_letters + string.digits
@@ -146,6 +151,29 @@ def file_d_attente(request):
         else:
 
             print('Erreur lors de la récupération des patients.')
+
+    except:
+        return render(request, 'personnel/microFailed.html')
+
+@login_required(login_url='/login')
+def rendezvous(request):
+
+    try:
+        url = 'http://gestionrdv:8003/api/rdv/'
+        response = requests.get(url)
+        dataToSave = response.json()
+        for elt in dataToSave:
+            if RendezVous.objects.filter(nom=elt['nom']).exists():
+                pass
+            else:
+                tmp = RendezVous(nom=elt['nom'],prenom=elt['prenom'], medecin=elt['medecin'], date=elt['date'], heure=elt['heure'], message=elt['message'])
+                tmp.save()
+
+        patient = RendezVous.objects.all()
+                
+
+
+        return render(request, 'personnel/rendezvous.html', context={"data" : patient})
 
     except:
         return render(request, 'personnel/microFailed.html')

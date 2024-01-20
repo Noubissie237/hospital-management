@@ -6,7 +6,7 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = '__all__'
         
-class RDVSerializer(serializers.ModelSerializer):
+class RendezVousSerializer(serializers.ModelSerializer):
     class Meta:
         model = RendezVous
         fields = '__all__'

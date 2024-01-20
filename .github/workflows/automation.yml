@@ -45,3 +45,14 @@ jobs:
           docker build -t noubissie237/microservice_gestion_pharmacie:latest .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push noubissie237/microservice_gestion_pharmacie:latest
+
+      # Étape de construction des Rendez Vous
+      - name: Build and push microservice_gestion_RDV
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.MY_DOCKER_HUB_TOKEN }}
+        run: |
+          cd GestionRDV
+          docker build -t noubissie237/microservice_gestion_rendez_vous:latest .
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push noubissie237/microservice_gestion_rendez_vous:latest

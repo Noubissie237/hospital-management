@@ -14,8 +14,11 @@ class prescriptionAdmin(admin.ModelAdmin):
 class consultationAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'email', 'age', 'service', 'sexe','status')
 
+class AdminRDV(admin.ModelAdmin):
+    list_display = ('nom','prenom','medecin', 'date', 'heure','message')
 
 admin.site.register(Medecin, medecinAdmin)
 admin.site.register(Specialite, specialiteAdmin)
 admin.site.register(Prescription, prescriptionAdmin)
 admin.site.register(Consultation, consultationAdmin)
+admin.site.register(RendezVous,AdminRDV)

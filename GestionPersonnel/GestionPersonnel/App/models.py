@@ -46,4 +46,21 @@ class Prescription(models.Model):
     def __str__(self):
         return self.nom
     
+class Disponibilite(models.Model):
+    
+    medecin = models.CharField(max_length=60)
+    date = models.DateField()
+    heure = models.TimeField()
+
+
+class RendezVous(models.Model):
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=50)
+    medecin = models.CharField(max_length=100)
+    date = models.DateField()
+    heure = models.TimeField()
+    message = models.TextField(max_length=1000)
+    
+    def __str__(self) :
+        return self.nom
     
