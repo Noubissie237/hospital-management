@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+
+
+
+<h1 class="text-capitalize text-center mx-10 bg-info text-dark">Prendre un rendez vous</h1>
+
+<form method="post">
+
+    <input name="name" hidden type="text" class="form-control" id="name" placeholder="name" value="{{user.first_name}}">
+    <input name="lastname" hidden type="text" class="form-control" id="lastname" placeholder="lastname" value="{{user.last_name}}">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="nom-select" style="color: black; font-size: 18px; box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.3);">Nom du Medecin :</label>
+            <select id="nom-select" class= "form-control" name="nom-select" onchange="afficherAutresPatients()" required>
+                <option disabled selected>-- Choisissez un nom --</option>
+                
+                    <option value="CHIRURGIEN">CHIRURGIEN</option>
+                    <option value="CARDIOLOGUE">CARDIOLOGUE</option>
+                    <option value="DERMATOLOGUE">DERMATOLOGUE</option>
+                    <option value="DENTISTE">DENTISTE</option>
+                    <option value="OPHTALMOLOGUE">OPHTALMOLOGUE</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-select" style="color: black; font-size: 18px; box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.3);">Date du rendez vous :</label>
+            <select id="date-select" class= "form-control" name="date-select" required>
+                <!-- Options seront ajoutées via JavaScript -->
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="heure-select" style="color: black; font-size: 18px; box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.3);">Heure du rendez vous :</label>
+            <select id="heure-select" class= "form-control" name="heure-select" required>
+                <!-- Options seront ajoutées via JavaScript -->
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="message" style="color: black; font-size: 18px; box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.3);">Message (facultatif) :</label>
+            <textarea id="message" name="message" rows="4" cols="50"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Prendre Rendez-vous</button>
+</form>
+
+<script>
+    function afficherAutresPatients() {
+        var nomSelect = document.getElementById("nom-select");
+        var dateSelect = document.getElementById("date-select");
+        var heureSelect = document.getElementById("heure-select");
+
+        // Obtenez la valeur sélectionnée du médecin
+        var selectedMedecin = nomSelect.options[nomSelect.selectedIndex].value;
+
+        // Effacez les options actuelles
+        dateSelect.innerHTML = "";
+        heureSelect.innerHTML = "";
+
+        // Remplissez les options avec les dates et heures correspondantes
+        {% for patient in patient_list %}
+            if ("{{ patient.medecin }}" === selectedMedecin) {
+                var newDateOption = document.createElement("option");
+                newDateOption.value = "{{ patient.date }}";
+                newDateOption.text = "{{ patient.date }}";
+                dateSelect.add(newDateOption);
+
+                var newHeureOption = document.createElement("option");
+                newHeureOption.value = "{{ patient.heure }}";
+                newHeureOption.text = "{{ patient.heure }}";
+                heureSelect.add(newHeureOption);
+            }
+        {% endfor %}
+    }
+</script>
+
+
+{% endblock content %}

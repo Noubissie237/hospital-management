@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+
+<h1 class="text-capitalize text-center mx-10 bg-warning text-dark">Enregistrer un Repas</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="jour"> jour </label>
+            <input name="jour" required type="date" class="form-control" id="jour" placeholder="jour">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="heure"> Heure </label>
+            <input name="heure" required type="time" class="form-control" id="heure" placeholder="heure">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="repas"> Repas </label>
+            <input name="repas" required type="text" class="form-control" id="repas" placeholder="repas">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="boisson"> Boisson </label>
+            <input name="boisson" required type="text" class="form-control" id="boisson" placeholder="boisson">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="lieux"> Lieux </label>
+            <input name="lieux" required type="text" class="form-control" id="lieux" placeholder="lieux">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Enregistrer</button>
+
+    
+</form>
+<br><br><br><br><br><br><br>
+{% endblock content %}

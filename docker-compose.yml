@@ -31,15 +31,15 @@ services:
     volumes:
       - ./StockManagment/StockManagment:/app
       
-  patientso:
+  gestionrdv:
     build: 
-      context: ./patient_so
+      context: ./GestionRDV
     ports:
       - "8003:8003"
     networks:
       - hospitalnetwork
     volumes:
-      - ./patient_so:/app
+      - ./GestionRDV:/app
 
 networks:
   hospitalnetwork:

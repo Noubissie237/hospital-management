@@ -1,0 +1,82 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;1,200;1,300;1,400&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+    }
+    body {
+    margin: 0 ;
+    height: 100vh;
+    max-height: 100vh;
+    padding:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    }
+
+    .container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 450px;
+    }
+
+    #post-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input{
+    
+        padding: 10PX;
+        margin: 8px 0;
+        padding-left: 20px;
+    
+    
+    
+        padding: 20PX 0;
+        padding-left: 5PX;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    
+        }
+
+        input[type=submit] {
+    
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer; 
+        }
+
+        input[type=submit]:hover {
+        background-color: #45a049;
+        }
+</style>
+<div>
+<h2>Django Chat</h2>
+</div>
+<div class="container">
+<form id = "post-form" method="POST" action="checkview">
+    {% csrf_token %}
+    <input type="text" name="room_name" placeholder="Room" />
+    <input type="text" name="username" placeholder="Username"/>
+    <input type="submit" value="Enter Room">
+</form>
+</div>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+
+<h1 class="text-capitalize text-center mx-10 bg-warning text-dark">Enregistrer un nouveau patient</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="name"> Nom </label>
+            <input name="name" required type="text" class="form-control" id="name" placeholder="name">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="prenom"> Prenom </label>
+            <input name="prenom" required type="text" class="form-control" id="prenom" placeholder="surname">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="email"> Email </label>
+            <input name="email" required type="email" class="form-control" id="email" placeholder="email">
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="sex">Sexe</label>
+            <select name="sex" class="form-control" required id="sex">
+                <option> Choose the gender .. </option>
+                <option value="M">Male</option>
+                <option value="F">Feminine</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" name="age" >
+        </div>
+        <div class="form-group col-md-6">
+            <label for="service">Service</label>
+            <select name="service" class="form-control" required id="service">
+                <option> Choosissez le service</option>
+                <option value="CHIRURGIEN">CHIRURGIEN</option>
+                <option value="CARDIOLOGUE">CARDIOLOGUE</option>
+                <option value="DERMATOLOGUE">DERMATOLOGUE</option>
+                <option value="DENTISTE">DENTISTE</option>
+                <option value="OPHTALMOLOGUE">OPHTALMOLOGUE</option>
+                <option value="dollar">dollar</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Enregistrer</button>
+
+    
+</form>
+<br><br><br><br><br><br><br>
+{% endblock content %}
