@@ -60,6 +60,7 @@ class RendezVous(models.Model):
     date = models.DateField()
     heure = models.TimeField()
     message = models.TextField(max_length=1000)
+    status = models.BooleanField(default=False)
     
     def __str__(self) :
         return self.nom
