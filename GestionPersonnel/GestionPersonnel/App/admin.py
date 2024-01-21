@@ -15,7 +15,7 @@ class consultationAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'email', 'age', 'service', 'sexe','status')
 
 class AdminRDV(admin.ModelAdmin):
-    list_display = ('nom','prenom','medecin', 'date', 'heure','message')
+    list_display = ('nom','prenom','medecin', 'date', 'heure','message', 'status')
 
 admin.site.register(Medecin, medecinAdmin)
 admin.site.register(Specialite, specialiteAdmin)
