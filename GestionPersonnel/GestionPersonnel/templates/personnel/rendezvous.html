@@ -12,6 +12,7 @@
                         <th scope="col">Prénoms</th>
                         <th scope="col">Date</th>
                         <th scope="col">heure</th>
+                        <th scope="col">status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,9 +20,13 @@
 
                     {% for elt in data %}
                     <tr class="userLine">
-
                         <td>
-                            {{elt.nom}}
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pk" value="{{ elt.nom }}">
+                                <button type="submit" class="text-primary fw-bold bg-light" style="border: 0;">{{elt.nom }}</button>
+                            </form>
+
                         </td>
 
                         <!-- <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td> -->
@@ -30,6 +35,7 @@
                         <td>{{elt.date}}</td>
 
                         <td class="fw-bold">{{ elt.heure }}</td>
+                        <td><span class="badge bg-warning">Non reçu</span></td>
 
                     </tr>
                     <input type="hidden" id="doctSpeciality" value={{ user.Specialite }}>
