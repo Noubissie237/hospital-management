@@ -8,49 +8,32 @@
             <table class="table table-borderless">
                 <thead>
                     <tr>
-                        <th scope="col">Images</th>
                         <th scope="col">Noms</th>
                         <th scope="col">Prénoms</th>
-                        <th scope="col">Sexes</th>
-                        <th scope="col">Ages</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">heure</th>
                     </tr>
                 </thead>
                 <tbody>
 
 
                     {% for elt in data %}
-                    {{elt}}
                     <tr class="userLine">
-                        {% if elt.sexe == 'MASCULIN' %}
-                        <th scope="row">
-                            <a href="#"><img src="{% static 'img/men.png' %}" width="25" /></a>
-                        </th>
-                        {% else %}
-                        <th scope="row">
-                            <a href="#"><img src="{% static 'img/women.jpeg' %}" width="25" /></a>
-                        </th>
-                        {% endif %}
-                        <td>
-                            <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="pk" value="{{ elt.email }}">
-                                <button type="submit" class="text-primary fw-bold bg-light" style="border: 0;">{{elt.nom }}</button>
-                            </form>
 
+                        <td>
+                            {{elt.nom}}
                         </td>
 
                         <!-- <td><a href="/patient/{{ elt }}" class="text-primary fw-bold">{{ elt.nom }}</a></td> -->
                         <td>{{ elt.prenom }}</td>
 
-                        <td>{{elt.sexe}}</td>
+                        <td>{{elt.date}}</td>
 
-                        <td class="fw-bold">{{ elt.age }}</td>
-                        <td><span class="badge bg-warning">En attente</span></td>
+                        <td class="fw-bold">{{ elt.heure }}</td>
 
                     </tr>
                     <input type="hidden" id="doctSpeciality" value={{ user.Specialite }}>
-                    <input type="hidden" class="customerLookingFor" value={{ elt.service }}>
+                    <input type="hidden" class="customerLookingFor" value={{ elt.medecin }}>
                     {% endfor %}
                 </tbody>
             </table>

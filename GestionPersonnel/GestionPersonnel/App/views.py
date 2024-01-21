@@ -169,9 +169,7 @@ def rendezvous(request):
                 tmp = RendezVous(nom=elt['nom'],prenom=elt['prenom'], medecin=elt['medecin'], date=elt['date'], heure=elt['heure'], message=elt['message'])
                 tmp.save()
 
-        patient = RendezVous.objects.all()
-                
-
+        patient = dataToSave
 
         return render(request, 'personnel/rendezvous.html', context={"data" : patient})
 
