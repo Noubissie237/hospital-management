@@ -1,4 +1,4 @@
-# Gestion d'un Hopital
+# TP INF 331 GROUPE 20 :  Gestion d'un Hopital
 
 # Application de Gestion d'un hopital en utilisant les langages de programmation Python, javaScript, et les framework Django et Bootstrap
 
@@ -41,3 +41,18 @@ L'application utilise les technologies suivantes :
 **- Framework Frontend** : Bootstrap_  <br>
 **- Framework Backend** : _DJANGO_ <br>
 **- Base de Données** : _SQLite_ <br>
+
+# FONCTIONNEMENT
+
+A partir du dossier racine, Demarrer le projet en tapant la commande: <br>
+  - docker-compose up -d
+
+Ouvrez chaque micro service dans le navigateur à l'adresse local et sur les ports ci-dessous: <br>
+
+- Microservice de gestion des patients : port 8001
+- Microservice de gestion du personnel : port 8000
+- Microservice de gestion de la pharmacie : port 8002
+
+## informations de connexion pour les microservice de gestion du personnel:
+  - user : nom de la specialité (Exemple : Dentiste, Gynecologue, Ophtamologue, Generaliste, Chirurgiste)
+  - password : admin
